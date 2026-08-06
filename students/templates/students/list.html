@@ -1,0 +1,10 @@
+<div class="card shadow p-3 mb-3">
+    <h4>{{ student.name }}</h4>
+    <p>Email: {{ student.email }}</p>
+    <p>CGPA: {{ student.cgpa }}</p>
+
+    <p><strong>Skills:</strong> {{ student.skills }}</p>
+    <a href="/profile/{{ student.id }}/" class="btn btn-primary">
+        View Profile
+    </a>
+</div>

@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Shortlisted Students</title>
+</head>
+
+<body style="background:#f2f2f2; font-family: Arial;">
+
+<div style="background:#2f73c0; color:white; padding:15px;">
+    <h2>🔥 Top 10% Students (Shortlisted)</h2>
+</div>
+
+<div style="width:80%; margin:20px auto;">
+
+    {% for student in students %}
+    <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px;">
+        
+        <h3>{{ student.name }}</h3>
+
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>CGPA:</strong> {{ student.cgpa }}</p>
+
+        <p><strong>Skills:</strong>
+            {% for skill in student.skills.all %}
+                {{ skill.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

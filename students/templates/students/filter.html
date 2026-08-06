@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Company Filter</title>
+</head>
+
+<body style="background:#f2f2f2; font-family: Arial;">
+
+<div style="background:#2f73c0; color:white; padding:15px;">
+    <h2>🏢 Company Filter Panel</h2>
+</div>
+
+<div style="width:80%; margin:20px auto;">
+
+    <!-- FILTER FORM -->
+    <form method="GET" style="margin-bottom:20px;">
+        
+        <input type="number" step="0.1" name="cgpa" placeholder="Minimum CGPA"
+               style="padding:8px; margin-right:10px;">
+        
+        <input type="text" name="skill" placeholder="Skill (e.g. Python)"
+               style="padding:8px; margin-right:10px;">
+        
+        <button type="submit">Apply Filter</button>
+    </form>
+
+    <!-- RESULTS -->
+    {% for student in students %}
+    <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px;">
+        
+        <h3>{{ student.name }}</h3>
+
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>CGPA:</strong> {{ student.cgpa }}</p>
+
+        <p><strong>Skills:</strong>
+            {% for skill in student.skills.all %}
+                {{ skill.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+
+    </div>
+    {% empty %}
+    <p>No students match criteria ❌</p>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<h2>Companies Visiting</h2>
+
+{% for company in companies %}
+<div class="card p-3 m-3 shadow">
+    <h4>{{ company.name }}</h4>
+    <p>Min CGPA: {{ company.min_cgpa }}</p>
+    <p>Skills: {{ company.required_skills }}</p>
+
+    <a href="/company/{{ company.id }}/" class="btn btn-primary">
+        View Shortlist
+    </a>
+</div>
+{% endfor %}

@@ -1,0 +1,23 @@
+<h2>{{ company.name }}</h2>
+
+<h3>🏆 Top 10 Students</h3>
+
+{% for student in top_students %}
+<div class="card p-3 m-2">
+    <h4>{{ student.name }}</h4>
+    <p>CGPA: {{ student.cgpa }}</p>
+    <p>Skills: {{ student.skills }}</p>
+</div>
+{% endfor %}
+
+<hr>
+
+<h3>All Eligible Students</h3>
+
+{% for student in students %}
+<div class="card p-3 m-2">
+    <h4>{{ student.name }}</h4>
+    <p>CGPA: {{ student.cgpa }}</p>
+    <p>Skills: {{ student.skills }}</p>
+</div>
+{% endfor %}
