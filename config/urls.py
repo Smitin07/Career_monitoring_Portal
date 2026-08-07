@@ -1,12 +1,13 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from students import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    
+    path('company/', include('companies.urls')),
     path('', views.home),
     path('add/', views.add_student),
     path('students/', views.students_list),

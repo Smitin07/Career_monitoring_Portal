@@ -8,9 +8,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # 🔐 SECURITY
 SECRET_KEY = 'django-insecure-your-secret-key'  # you can keep this for now
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["*"]
+
+
 
 
 # 📦 INSTALLED APPS
@@ -24,6 +26,9 @@ INSTALLED_APPS = [
 
     # your app
     'students',
+    'accounts',
+    'companies',
+    
 ]
 
 
@@ -36,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 
@@ -97,6 +103,7 @@ USE_TZ = True
 
 # 📁 STATIC FILES (CSS, JS)
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # 📂 MEDIA FILES (UPLOADS - VERY IMPORTANT)
@@ -106,3 +113,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 🔢 DEFAULT PRIMARY KEY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

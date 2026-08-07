@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import StudentProfile
 from .forms import StudentForm
+from companies.models import Company
 
 
 def home(request):
@@ -9,7 +10,7 @@ def home(request):
 
 def add_student(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST, request.FILES)  # ⭐ FILES added
+        form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -25,7 +26,8 @@ def students_list(request):
     students = StudentProfile.objects.all()
 
     if query:
-        students = students.filter(skills__name__icontains=query).distinct()
+        # FIXED HERE
+        students = students.filter(skills__icontains=query)
 
     return render(request, 'students/list.html', {'students': students})
 
@@ -55,13 +57,17 @@ def filter_students(request):
         students = students.filter(cgpa__gte=cgpa)
 
     if skill:
-        students = students.filter(skills__name__icontains=skill).distinct()
+        # FIXED HERE
+        students = students.filter(skills__icontains=skill)
 
     return render(request, 'students/filter.html', {'students': students})
+
 
 def companies(request):
     companies = Company.objects.all()
     return render(request, 'students/companies.html', {'companies': companies})
+
+
 def company_detail(request, id):
     company = Company.objects.get(id=id)
     students = StudentProfile.objects.all()
@@ -73,10 +79,9 @@ def company_detail(request, id):
             student_skills = student.skills.lower()
             company_skills = company.required_skills.lower()
 
-            if any(skill in student_skills for skill in company_skills.split(',')):
+            if any(skill.strip() in student_skills for skill in company_skills.split(',')):
                 shortlisted.append(student)
 
-    # sort by CGPA
     shortlisted = sorted(shortlisted, key=lambda x: x.cgpa, reverse=True)
 
     top_students = shortlisted[:10]
